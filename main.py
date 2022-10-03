@@ -13,6 +13,8 @@ import calendar
 from math import sqrt
 from joblib import Parallel, delayed
 from csv import DictWriter
+#import config
+import pyotp
 
 import sys
 #sys.stdout = open('logfile', 'w')
@@ -285,8 +287,23 @@ def saveTokeninfo():
 
 def instances(n,i,j,k):
 	#for n,(i,j,k) in enumerate(zip(creds.user_data["NIFTY"]["ACC"],creds.user_data["NIFTY"]["Lots"],creds.user_data["NIFTY"]["Slice"])):
-		obj = SmartConnect(api_key = creds.API_KEY[n])
-		data = obj.generateSession(creds.USER_NAME[n],creds.PWD[n])
+		attempts = 5
+		while attempts > 0:
+			attempts = attempts-1
+			qrOtp = creds.qrOtp[n]
+			totp = pyotp.TOTP(qrOtp)
+			totp = totp.now()
+			obj = SmartConnect(api_key = creds.API_KEY[n])
+			data = obj.generateSession(creds.USER_NAME[n],creds.PWD[n],totp)
+			print(data)
+			if data['status']:
+				break
+			time.sleep(2)
+
+
+		
+
+
 		strategy(n)
 		#print(creds.trade_list[n])
 		tl=pd.DataFrame(creds.trade_list[n])

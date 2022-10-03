@@ -10,3 +10,4 @@
 /t2.csv
 /tokens.xlsx
 /__pycache__
+/creds.py
