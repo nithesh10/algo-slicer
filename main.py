@@ -262,24 +262,34 @@ def gettokenid(name,date,strike,ce_pe):
 	print("sym=",sym,"token",token["token"].iloc[0]	)
 	return sym,token["token"].iloc[0]
 
+def download_new_data():
+	url = "https://margincalculator.angelbroking.com/OpenAPI_File/files/OpenAPIScripMaster.json"
+	d = requests.get(url).json()
+	token_df = pd.DataFrame.from_dict(d)
+	token_df["expiry"] = pd.to_datetime(token_df["expiry"])
+	token_df = token_df.astype({"strike":float})
+	token_df.to_excel("alltokens.xlsx")
+	df=token_df
+	creds.token_info= df[(df['exch_seg']=="NFO") & (df["instrumenttype"]==("OPTIDX" or "OPTSTK")) & ((df["name"]==("BANKNIFTY")) | (df["name"]==("NIFTY")))]
+	print("token_info saved")
+	print(creds.token_info)
+	creds.token_info.to_excel("tokens.xlsx")
 def saveTokeninfo():
-	try:
-		path = pathlib.Path(__file__).parent.resolve()
-		dff=pd.read_excel(os.path.join(path,"tokens.xlsx"))
-		creds.token_info=dff
-		print("existing token info imported")
-	except:
-		url = "https://margincalculator.angelbroking.com/OpenAPI_File/files/OpenAPIScripMaster.json"
-		d = requests.get(url).json()
-		token_df = pd.DataFrame.from_dict(d)
-		token_df["expiry"] = pd.to_datetime(token_df["expiry"])
-		token_df = token_df.astype({"strike":float})
-		token_df.to_excel("alltokens.xlsx")
-		df=token_df
-		creds.token_info= df[(df['exch_seg']=="NFO") & (df["instrumenttype"]==("OPTIDX" or "OPTSTK")) & ((df["name"]==("BANKNIFTY")) | (df["name"]==("NIFTY")))]
-		print("token_info saved")
-		print(creds.token_info)
-		creds.token_info.to_excel("tokens.xlsx")
+	print("press 1 to continue with old data")
+	print("press 2 to download new data (takes some time)")
+	i=int(input())
+	if(i==1):
+		try:
+				path = pathlib.Path(__file__).parent.resolve()
+				dff=pd.read_excel(os.path.join(path,"tokens.xlsx"))
+				creds.token_info=dff
+				print("existing token info imported")
+		except:
+			download_new_data()
+	else:
+		download_new_data()
+
+		
 
 
 
