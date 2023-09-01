@@ -24,6 +24,8 @@ class App(Thread):
 		df2 = pd.read_excel(self.filepath,'BNF',usecols="C,D,F,G")
 		df3 = pd.read_excel(self.filepath,'Nifty Customer Code')
 		df4 = pd.read_excel(self.filepath,'BNF Customer Code')
+		df5 = pd.read_excel(self.filepath,'FNF',usecols="C,D,F,G")
+		df6 = pd.read_excel(self.filepath,'Finnifty Customer Code')
 		data={
 			"NIFTY":
 			{
@@ -50,7 +52,7 @@ class App(Thread):
 				"Force Buy":df1['FORCE B'].dropna().to_numpy(),
 
 
-				"NIFTY QTY FRZ":df3['Qty Freeze'].dropna().to_numpy(),
+				"Active":df3['Active'].dropna().to_numpy(),
 				"WAIT":df3['Wait Time'].dropna().to_numpy(),
 
 			},
@@ -78,8 +80,35 @@ class App(Thread):
 				"Force Sell":df2['FORCE S'].dropna().to_numpy(),
 				"Force Buy":df2['FORCE B'].dropna().to_numpy(),
 
-				"NIFTY QTY FRZ":df4['Qty Freeze'].dropna().to_numpy(),
+				"Active":df4['Active'].dropna().to_numpy(),
 				"WAIT":df4['Wait Time'].dropna().to_numpy(),
+			},
+			"FNF":
+			{
+				"EXS CE SELL":df5.iloc[0][0],
+				"EXS PE SELL":df5.iloc[1][0],
+				"EXS EXP SELL":df5.iloc[2][0],
+				"NEW CE SELL":df5.iloc[4][0],
+				"NEW PE SELL":df5.iloc[5][0],
+				"NEW EXP SELL":df5.iloc[7][0],
+
+				"EXS CE BUY":df5.iloc[0][2],
+				"EXS PE BUY":df5.iloc[1][2],
+				"EXS EXP BUY":df5.iloc[2][2],
+				"NEW CE BUY":df5.iloc[4][2],
+				"NEW PE BUY":df5.iloc[5][2],
+				"NEW EXP BUY":df5.iloc[7][2],
+
+				"ACC":df6['Client Code'].dropna().to_numpy(),
+				"Lots":df6['New Total Lots'].dropna().to_numpy(),
+				"Slice":df6['New Slicing'].dropna().to_numpy(),
+				"Exs Lots":df6['Exs Total Lots'].dropna().to_numpy(),
+				"Exs Slice":df6['Exs Slicing'].dropna().to_numpy(),
+				"Force Sell":df5['FORCE S'].dropna().to_numpy(),
+				"Force Buy":df5['FORCE B'].dropna().to_numpy(),
+
+				"Active":df6['Active'].dropna().to_numpy(),
+				"WAIT":df6['Wait Time'].dropna().to_numpy(),
 			}
 
 		}

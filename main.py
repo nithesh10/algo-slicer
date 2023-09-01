@@ -64,76 +64,111 @@ def strategy(i):
 		sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP SELL'],df1['NIFTY']['NEW PE SELL'],"PE")
 		pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"SELL",i)
 		print("strategy planing done")"""
-	if(int(df1["NIFTY"]["Force Sell"][0])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP SELL'],df1['NIFTY']['EXS CE SELL'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"BUY",i)
-	if(int(df1["NIFTY"]["Force Sell"][1])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP SELL'],df1['NIFTY']['EXS PE SELL'],"PE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"BUY",i)
-	if(int(df1["NIFTY"]["Force Sell"][2])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP SELL'],df1['NIFTY']['NEW CE SELL'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"SELL",i)
-	if(int(df1["NIFTY"]["Force Sell"][3])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP SELL'],df1['NIFTY']['NEW PE SELL'],"PE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"SELL",i)
-	
-	if(int(df1["NIFTY"]["Force Buy"][0])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP BUY'],df1['NIFTY']['EXS CE BUY'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"SELL",i)
-	if(int(df1["NIFTY"]["Force Buy"][1])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP BUY'],df1['NIFTY']['EXS PE BUY'],"PE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"SELL",i)
-	if(int(df1["NIFTY"]["Force Buy"][2])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP BUY'],df1['NIFTY']['NEW CE BUY'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"BUY",i)
-	if(int(df1["NIFTY"]["Force Buy"][3])==1):
-		sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP BUY'],df1['NIFTY']['NEW PE BUY'],"PE")
-		pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"BUY",i)
-		print("sym",sym,"token",token)
+	print("Nifty active:- ",int(df1["NIFTY"]["Active"][i]))
+	if(int(df1["NIFTY"]["Active"][i])==1):
+		if(int(df1["NIFTY"]["Force Sell"][0])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP SELL'],df1['NIFTY']['EXS CE SELL'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["NIFTY"]["Force Sell"][1])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP SELL'],df1['NIFTY']['EXS PE SELL'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["NIFTY"]["Force Sell"][2])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP SELL'],df1['NIFTY']['NEW CE SELL'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["NIFTY"]["Force Sell"][3])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP SELL'],df1['NIFTY']['NEW PE SELL'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"SELL",i)
+		
+		if(int(df1["NIFTY"]["Force Buy"][0])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP BUY'],df1['NIFTY']['EXS CE BUY'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["NIFTY"]["Force Buy"][1])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP BUY'],df1['NIFTY']['EXS PE BUY'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["NIFTY"]["Exs Lots"][i]),int(df1["NIFTY"]["Exs Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["NIFTY"]["Force Buy"][2])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP BUY'],df1['NIFTY']['NEW CE BUY'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["NIFTY"]["Force Buy"][3])==1):
+			sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP BUY'],df1['NIFTY']['NEW PE BUY'],"PE")
+			pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"BUY",i)
+			print("sym",sym,"token",token)
 
+	if(int(df1["BNF"]["Active"][i])==1):
+		if(int(df1["BNF"]["Force Sell"][0])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP SELL'],df1['BNF']['EXS CE SELL'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["BNF"]["Force Sell"][1])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP SELL'],df1['BNF']['EXS PE SELL'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["BNF"]["Force Sell"][2])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP SELL'],df1['BNF']['NEW CE SELL'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["BNF"]["Force Sell"][3])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP SELL'],df1['BNF']['NEW PE SELL'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"SELL",i)
+		
+		if(int(df1["BNF"]["Force Buy"][0])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP BUY'],df1['BNF']['EXS CE BUY'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["BNF"]["Force Buy"][1])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP BUY'],df1['BNF']['EXS PE BUY'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["BNF"]["Force Buy"][2])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP BUY'],df1['BNF']['NEW CE BUY'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["BNF"]["Force Buy"][3])==1):
+			sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP BUY'],df1['BNF']['NEW PE BUY'],"PE")
+			pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"BUY",i)
+			print("sym",sym,"token",token)
 
-	
-	if(int(df1["BNF"]["Force Sell"][0])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP SELL'],df1['BNF']['EXS CE SELL'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"BUY",i)
-	if(int(df1["BNF"]["Force Sell"][1])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP SELL'],df1['BNF']['EXS PE SELL'],"PE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"BUY",i)
-	if(int(df1["BNF"]["Force Sell"][2])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP SELL'],df1['BNF']['NEW CE SELL'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"SELL",i)
-	if(int(df1["BNF"]["Force Sell"][3])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP SELL'],df1['BNF']['NEW PE SELL'],"PE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"SELL",i)
-	
-	if(int(df1["BNF"]["Force Buy"][0])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP BUY'],df1['BNF']['EXS CE BUY'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"SELL",i)
-	if(int(df1["BNF"]["Force Buy"][1])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP BUY'],df1['BNF']['EXS PE BUY'],"PE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["BNF"]["Exs Lots"][i]),int(df1["BNF"]["Exs Slice"][i]),sym,token,"SELL",i)
-	if(int(df1["BNF"]["Force Buy"][2])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP BUY'],df1['BNF']['NEW CE BUY'],"CE")
-		print("sym",sym,"token",token)
-		pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"BUY",i)
-	if(int(df1["BNF"]["Force Buy"][3])==1):
-		sym,token=gettokenid("BANKNIFTY",df1['BNF']['NEW EXP BUY'],df1['BNF']['NEW PE BUY'],"PE")
-		pushorder(int(df1["BNF"]["Lots"][i]),int(df1["BNF"]["Slice"][i]),sym,token,"BUY",i)
-		print("sym",sym,"token",token)
+	if(int(df1["FNF"]["Active"][i])==1):
+		if(int(df1["FNF"]["Force Sell"][0])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['EXS EXP SELL'],df1['FNF']['EXS CE SELL'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["FNF"]["Exs Lots"][i]),int(df1["FNF"]["Exs Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["FNF"]["Force Sell"][1])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['EXS EXP SELL'],df1['FNF']['EXS PE SELL'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["FNF"]["Exs Lots"][i]),int(df1["FNF"]["Exs Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["FNF"]["Force Sell"][2])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['NEW EXP SELL'],df1['FNF']['NEW CE SELL'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["FNF"]["Lots"][i]),int(df1["FNF"]["Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["FNF"]["Force Sell"][3])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['NEW EXP SELL'],df1['FNF']['NEW PE SELL'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["FNF"]["Lots"][i]),int(df1["FNF"]["Slice"][i]),sym,token,"SELL",i)
 
+		if(int(df1["FNF"]["Force Buy"][0])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['EXS EXP BUY'],df1['FNF']['EXS CE BUY'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["FNF"]["Exs Lots"][i]),int(df1["FNF"]["Exs Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["FNF"]["Force Buy"][1])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['EXS EXP BUY'],df1['FNF']['EXS PE BUY'],"PE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["FNF"]["Exs Lots"][i]),int(df1["FNF"]["Exs Slice"][i]),sym,token,"SELL",i)
+		if(int(df1["FNF"]["Force Buy"][2])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['NEW EXP BUY'],df1['FNF']['NEW CE BUY'],"CE")
+			print("sym",sym,"token",token)
+			pushorder(int(df1["FNF"]["Lots"][i]),int(df1["FNF"]["Slice"][i]),sym,token,"BUY",i)
+		if(int(df1["FNF"]["Force Buy"][3])==1):
+			sym,token=gettokenid("FINNIFTY",df1['FNF']['NEW EXP BUY'],df1['FNF']['NEW PE BUY'],"PE")
+			pushorder(int(df1["FNF"]["Lots"][i]),int(df1["FNF"]["Slice"][i]),sym,token,"BUY",i)
+			print("sym",sym,"token",token)
 	
 
 
@@ -257,6 +292,7 @@ def gettokenid(name,date,strike,ce_pe):
 	year=str(int(datem.year%2000))
 	day=str(('{:02d}'.format(datem.day)))
 	sym=str(name)+day+month+year+str(strike)+str(ce_pe).upper()
+	print("searching ",sym)
 	df=creds.token_info
 	token=df[(df['symbol']==sym)]
 	print("sym=",sym,"token",token["token"].iloc[0]	)
@@ -270,7 +306,7 @@ def download_new_data():
 	token_df = token_df.astype({"strike":float})
 	token_df.to_excel("alltokens.xlsx")
 	df=token_df
-	creds.token_info= df[(df['exch_seg']=="NFO") & (df["instrumenttype"]==("OPTIDX" or "OPTSTK")) & ((df["name"]==("BANKNIFTY")) | (df["name"]==("NIFTY")))]
+	creds.token_info= df[(df['exch_seg']=="NFO") & (df["instrumenttype"]==("OPTIDX" or "OPTSTK")) & ((df["name"]==("BANKNIFTY")) | (df["name"]==("FINNIFTY")) | (df["name"]==("NIFTY")))]
 	print("token_info saved")
 	print(creds.token_info)
 	creds.token_info.to_excel("tokens.xlsx")
@@ -334,20 +370,19 @@ def instances(n,i,j,k):
 
 def main():
 	def take_response():
-		a1=creds.user_data
-		app.update_parameters()
-		b1=creds.user_data
-		a=DeepDiff(a1,b1)
-		if a=={} :
-			print("\n\nPress enter after making changes on excel sheet to run the bot")
-			print("Or press 's' to stop the bot")
-			cm=input("")
-			if(cm=='s'):
-				#print("stop bot command issued")
-				stop_check()
-			time.sleep(1)
+		#a1=creds.user_data
+		#b1=creds.user_data
+		#a=DeepDiff(a1,b1)
+		#if a=={} :
+		print("\n\nPress enter after making changes on excel sheet to run the bot")
+		print("Or press 's' to stop the bot")
+		cm=input("")
+		if(cm=='s'):
+			#print("stop bot command issued")
+			stop_check()
 		else:
-			print("changes found.placing orders")
+			app.update_parameters()
+			print("placing orders")
 			st = datetime.now()
 			creds.orderbook=creds.trade_list
 			creds.trade_list.clear()
@@ -362,7 +397,7 @@ def main():
 			print("module ran in",ed-st)
 			print("\n\n***Restarting Bot***\n\n")
 			print("Looking for changes..........")
-		take_response()
+			take_response()
 
 	def stop_check():
 		#th1.join()
@@ -385,8 +420,9 @@ def main():
 	take_response()
 
 if __name__ == '__main__':
+	main()
 	#print("main")
-	th1 = threading.Thread(target=main())
+	#th1 = threading.Thread(target=main())
 
-	th1.start()
+	#th1.start()
 

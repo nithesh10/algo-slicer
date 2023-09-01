@@ -1,9 +1,9 @@
-deepdiff==5.8.1
-joblib==1.1.0
-pandas==1.4.2
-pyotp==2.6.0
-python_dateutil==2.8.2
+deepdiff
+joblib
+pandas
+pyotp
+python_dateutil
 smartapi
 smartapi_python
-TA_Lib==0.4.24
-websocket_client==1.3.3
+TA_Lib
+websocket_client
