@@ -64,8 +64,9 @@ def strategy(i):
 		sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP SELL'],df1['NIFTY']['NEW PE SELL'],"PE")
 		pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"SELL",i)
 		print("strategy planing done")"""
-	print("Nifty active:- ",int(df1["NIFTY"]["Active"][i]))
+	
 	if(int(df1["NIFTY"]["Active"][i])==1):
+		print("Nifty active:- ",int(df1["NIFTY"]["Active"][i]))
 		if(int(df1["NIFTY"]["Force Sell"][0])==1):
 			sym,token=gettokenid("NIFTY",df1['NIFTY']['EXS EXP SELL'],df1['NIFTY']['EXS CE SELL'],"CE")
 			print("sym",sym,"token",token)
@@ -99,8 +100,9 @@ def strategy(i):
 			sym,token=gettokenid("NIFTY",df1['NIFTY']['NEW EXP BUY'],df1['NIFTY']['NEW PE BUY'],"PE")
 			pushorder(int(df1["NIFTY"]["Lots"][i]),int(df1["NIFTY"]["Slice"][i]),sym,token,"BUY",i)
 			print("sym",sym,"token",token)
-
+	
 	if(int(df1["BNF"]["Active"][i])==1):
+		print("BNF active:- ",int(df1["BNF"]["Active"][i]))
 		if(int(df1["BNF"]["Force Sell"][0])==1):
 			sym,token=gettokenid("BANKNIFTY",df1['BNF']['EXS EXP SELL'],df1['BNF']['EXS CE SELL'],"CE")
 			print("sym",sym,"token",token)
@@ -136,6 +138,7 @@ def strategy(i):
 			print("sym",sym,"token",token)
 
 	if(int(df1["FNF"]["Active"][i])==1):
+		print("FNF active:- ",int(df1["FNF"]["Active"][i]))
 		if(int(df1["FNF"]["Force Sell"][0])==1):
 			sym,token=gettokenid("FINNIFTY",df1['FNF']['EXS EXP SELL'],df1['FNF']['EXS CE SELL'],"CE")
 			print("sym",sym,"token",token)
@@ -196,14 +199,14 @@ def mul_order(n,obj,trade_list):
 					print("Order placement failed: {}".format(e))
 	def place_multiple_orders(tradeList):
 		df1=creds.user_data
-		if(int(df1['NIFTY']['WAIT'])==0):
-			with concurrent.futures.ThreadPoolExecutor() as executor:
+		if(float(df1['NIFTY']['WAIT'])==float(0)):
+			with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
 				executor.map(place_order, tradeList)
 		else:
 			for i in tradeList:
 				df1=creds.user_data
-				time.sleep(int(df1['NIFTY']['WAIT']))
-				print("Added delay of",int(df1['NIFTY']['WAIT']),"seconds")
+				time.sleep(float(df1['NIFTY']['WAIT']))
+				print("Added delay of",float(df1['NIFTY']['WAIT']),"seconds")
 				place_order(i)
 		
 
@@ -351,21 +354,24 @@ def instances(n,i,j,k):
 
 
 		strategy(n)
-		#print(creds.trade_list[n])
-		tl=pd.DataFrame(creds.trade_list[n])
-		tl['rank'] = tl.groupby(['tradingsymbol','quantity', 'transactiontype']).cumcount()
-		tl=tl.sort_values(['tradingsymbol', 'rank'])
-		#tl.to_csv(f"{n}t.csv")
-		tl.drop("rank", axis=1, inplace=True)
-		creds.trade_list[n]= tl.to_dict('records')
-		zz=pd.DataFrame(creds.trade_list[n])
-		zz.to_csv(f't{n}.csv')
+		print(creds.trade_list[n])
+		if(len(creds.trade_list[n])>0):
+			tl=pd.DataFrame(creds.trade_list[n])
+			if(len(tl)>0):
+				tl['rank'] = tl.groupby(['tradingsymbol','quantity', 'transactiontype']).cumcount()
+				tl=tl.sort_values(['tradingsymbol', 'rank'])
+				#tl.to_csv(f"{n}t.csv")
+				tl.drop("rank", axis=1, inplace=True)
+				creds.trade_list[n]= tl.to_dict('records')
+				zz=pd.DataFrame(creds.trade_list[n])
+				zz.to_csv(f't{n}.csv')
 
 
-		print("sending orderbook")
-		print(zz)
-		mul_order(n,obj,creds.trade_list[n])
-		checkorderstatus(n,obj)
+				print("sending orderbook")
+				print(zz)
+				mul_order(n,obj,creds.trade_list[n])
+				checkorderstatus(n,obj)
+
 
 
 def main():
